@@ -1,0 +1,23 @@
+#!/bin/bash
+while true 
+do
+COMMAND="$#"
+#read -r -p "Are You Sure to execute $1 $$#? [Y/n] " input
+read -r -p "Are You Sure to execute $1 ${!COMMAND}? [Y/n] " input
+case $input in
+    [yY][eE][sS]|[yY])
+	/sbin/.service $@
+	exit 0
+	;;
+
+    [nN][oO]|[nN])
+       	exit 1	
+	;;
+
+	    *)
+	echo "Invalid input..."
+	#	exit 1
+	;;
+esac
+
+done
