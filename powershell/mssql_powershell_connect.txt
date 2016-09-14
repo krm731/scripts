@@ -1,0 +1,12 @@
+$uid = 'saltuser'
+$pwd = '$2!tuser@123'
+$dt = new-object "System.Data.DataTable"
+$cn = new-object System.Data.SqlClient.SqlConnection "server='.';database=msdb;uid=$user;pwd=$pwd;"
+$cn.Open()
+$sql = $cn.CreateCommand()
+$sql.CommandText = "select name from sys.databases where state_desc='online' and name not in ('master','tempdb','msdb','model')"
+    $rdr = $sql.ExecuteReader()
+    $dt.Load($rdr)
+    $cn.Close()
+
+$dt 
